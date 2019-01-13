@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+	<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CoolMenu Experiment</title>
+  
+  <style>
+.content {
+	display:none;
+	border: thin solid red;
+    padding: 10px;
+    background: lightyellow;
+    width: min-content;
+}
+
+.hide-show {
+	font-size: x-large;
+	background: darkkhaki;
+    color: brown;
+    border: thin solid lightyellow;
+    width: max-content;
+    padding: 5px;
+
+  }
+  .insideWrapper {
+    background: blanchedalmond;
+    width: fit-content;
+	display:block;
+}
+#outsideWrapper{
+	
+}
+  </style>	
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+</head>
+<body>	
+
+<div id="outsideWrapper"
+<div class="insideWrapper">
+<div class="hide-show">Grain</div>'
+<ul class="content">
+<li>Wheat</li>
+<li>Rye</li>
+<li>White</li>
+</ul>
+<div class="hide-show">Cheese</div>'
+<ul class="content">
+<li>Swiss</li>
+<li>American</li>
+<li>Mozzarella</li>
+</ul>
+<div class="hide-show">Condiments</div>'
+<ul class="content">
+<li>Mustard</li>
+<li>Ketchup</li>
+<li>Horseradish</li>
+</ul>
+
+</div><!--END OF INSIDEWRAPPER-->	
+</div><!--END OF OUTSIDEWRAPPER-->'	
+		
+<script>
+$(document).ready(function(){
+	    $('.hide-show').on("click", function(e){
+        e.preventDefault();
+		//GOES UP TO PARENT THEN TO SIBLINGS OF PARENT
+        $(this).parent().siblings().children('.content').slideUp(1000);
+        $(this).siblings('.content').slideToggle(1000);
+		
+		    $('.insideWrapper').scrollTop($('.insideWrapper')[0].scrollHeight);
+
+    });
+
+ /*THIS ADDS CLICK OUTSIDE BOX [INSIDEWRAPPER] TO CLOSE*/ 
+$("body").mouseup(function(e)
+    {
+		;
+        var subject = $(".insideWrapper"); 
+		var content = $(".content");
+        if(e.target.id != subject.attr('id') && !subject.has(e.target).length)
+        {
+            content.slideUp(1000);
+        }
+});
+
+});
+</script>
+</body>
+</html>
