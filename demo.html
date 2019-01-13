@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>CoolMenu Experiment</title>
+<style>
+.content {
+  display: none;
+  border: thin solid red;
+  padding: 10px;
+  background: lightyellow;
+  width: 50vw;
+}
+
+.hide-show {
+  font-size: x-large;
+  background: darkkhaki;
+  color: brown;
+  border: thin solid lightyellow;
+  width: 100%;
+  padding: 5px;
+}
+.insideWrapper {
+  background: blanchedalmond;
+  width: 50vw;
+  display: block;
+}
+li {
+  list-style-type: none;
+  font-size:large;
+  color:green;
+}
+ul{padding:0;
+margin:0;}
+  </style>
+  
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+
+<body>
+
+  <div id="outsideWrapper" <div class="insideWrapper">
+    <div class="hide-show">Bread</div>
+    <div class="content">
+      <ul>
+        <li>Wheat</li>
+        <li>Rye</li>
+        <li>White</li>
+      </ul>
+    </div>
+    <div class="hide-show">Cheese</div>
+    <div class="content">
+      <ul>
+        <li>Swiss</li>
+        <li>American</li>
+        <li>Mozzarella</li>
+      </ul>
+    </div>
+    <div class="hide-show">Condiments</div>
+    <div class="content">
+      <ul>
+        <li>Mustard</li>
+        <li>Ketchup</li>
+        <li>Horseradish</li>
+      </ul>
+    </div>
+
+  </div>
+  <!--END OF INSIDEWRAPPER-->
+  </div>
+  <!--END OF OUTSIDEWRAPPER-->	
+		
+$(document).ready(function() {
+  $(".hide-show").on("click", function(e) {
+    e.preventDefault();
+    //open and close menu item
+    $(this)
+      .next(".content")
+      .slideToggle(1000);
+    //close menu item if another one opened
+    $(this)
+      .siblings()
+      .next(".content")
+      .slideUp(1000);
+
+    //keep menu on screen if expanding downward
+    $(".insideWrapper").scrollTop($(".insideWrapper")[0].scrollHeight);
+  });
+
+  /*THIS ADDS CLICK OUTSIDE BOX [INSIDEWRAPPER] TO CLOSE*/
+
+  $("body").mouseup(function(e) {
+    var subject = $(".insideWrapper");
+    var content = $(".content");
+    if (e.target.id != subject.attr("id") && !subject.has(e.target).length) {
+      content.slideUp(1000);
+    }
+  });
+});
+</body>
+</html>
